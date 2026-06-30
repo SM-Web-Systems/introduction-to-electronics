@@ -1,0 +1,57 @@
+{
+  "name": "Introduction to Electronics",
+  "children": [
+    {
+      "name": "Target Audience",
+      "children": [
+        {
+          "name": "Complete beginners"
+        },
+        {
+          "name": "Approx. 16 years old"
+        },
+        {
+          "name": "Arduino preparation"
+        }
+      ]
+    },
+    {
+      "name": "Learning Objectives",
+      "children": [
+        {
+          "name": "Building Projects",
+          "children": [
+            {
+              "name": "LED flasher"
+            },
+            {
+              "name": "Simple alarm circuit"
+            }
+          ]
+        },
+        {
+          "name": "Troubleshooting",
+          "children": [
+            {
+              "name": "Systematic fault-finding"
+            },
+            {
+              "name": "Debugging broken circuits"
+            }
+          ]
+        },
+        {
+          "name": "Arduino Bridging",
+          "children": [
+            {
+              "name": "Microcontroller functions"
+            },
+            {
+              "name": "Replacement benefits"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

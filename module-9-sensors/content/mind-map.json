@@ -1,0 +1,67 @@
+{
+  "name": "Electronics: Sensors & Actuators Overview",
+  "children": [
+    {
+      "name": "Sensors",
+      "children": [
+        {
+          "name": "Function",
+          "children": [
+            {
+              "name": "Physical quantity to electrical signal"
+            }
+          ]
+        },
+        {
+          "name": "Common Types",
+          "children": [
+            {
+              "name": "Light"
+            },
+            {
+              "name": "Temperature"
+            },
+            {
+              "name": "Distance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Actuators & Components",
+      "children": [
+        {
+          "name": "DC Motors"
+        },
+        {
+          "name": "Relays"
+        }
+      ]
+    },
+    {
+      "name": "Control Methods",
+      "children": [
+        {
+          "name": "Pulse Width Modulation (PWM)",
+          "children": [
+            {
+              "name": "Power control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Context",
+      "children": [
+        {
+          "name": "Arduino building"
+        },
+        {
+          "name": "Beginner level"
+        }
+      ]
+    }
+  ]
+}

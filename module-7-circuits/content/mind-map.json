@@ -1,0 +1,54 @@
+{
+  "name": "Introduction to Electronics",
+  "children": [
+    {
+      "name": "Target Audience",
+      "children": [
+        {
+          "name": "Beginners"
+        },
+        {
+          "name": "Arduino Builders"
+        }
+      ]
+    },
+    {
+      "name": "Core Concepts",
+      "children": [
+        {
+          "name": "Voltage Dividers"
+        },
+        {
+          "name": "Digital Input Resistors",
+          "children": [
+            {
+              "name": "Pull-up Resistors"
+            },
+            {
+              "name": "Pull-down Resistors"
+            }
+          ]
+        },
+        {
+          "name": "RC Circuits",
+          "children": [
+            {
+              "name": "Timing Basics"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LED Applications",
+      "children": [
+        {
+          "name": "Current-limiting Resistors"
+        },
+        {
+          "name": "Calculation Methods"
+        }
+      ]
+    }
+  ]
+}

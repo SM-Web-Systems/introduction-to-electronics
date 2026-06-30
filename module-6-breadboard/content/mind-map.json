@@ -1,0 +1,55 @@
+{
+  "name": "Introduction to Breadboarding",
+  "children": [
+    {
+      "name": "Target Audience",
+      "children": [
+        {
+          "name": "Complete beginners"
+        },
+        {
+          "name": "Ages ~16"
+        },
+        {
+          "name": "Arduino preparation"
+        }
+      ]
+    },
+    {
+      "name": "Internal Wiring",
+      "children": [
+        {
+          "name": "Power rails"
+        },
+        {
+          "name": "Terminal strips"
+        },
+        {
+          "name": "Solderless design"
+        }
+      ]
+    },
+    {
+      "name": "Practical Application",
+      "children": [
+        {
+          "name": "Building simple circuits"
+        },
+        {
+          "name": "Testing circuits"
+        }
+      ]
+    },
+    {
+      "name": "Troubleshooting",
+      "children": [
+        {
+          "name": "Common wiring mistakes"
+        },
+        {
+          "name": "Finding errors"
+        }
+      ]
+    }
+  ]
+}

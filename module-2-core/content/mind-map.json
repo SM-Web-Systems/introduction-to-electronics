@@ -1,0 +1,101 @@
+{
+  "name": "Electronics Core Concepts",
+  "children": [
+    {
+      "name": "Fundamental Quantities",
+      "children": [
+        {
+          "name": "Voltage (V)"
+        },
+        {
+          "name": "Current (I)"
+        },
+        {
+          "name": "Resistance (R)"
+        }
+      ]
+    },
+    {
+      "name": "Governing Laws",
+      "children": [
+        {
+          "name": "Ohm's Law",
+          "children": [
+            {
+              "name": "V = I x R"
+            }
+          ]
+        },
+        {
+          "name": "Power Calculation",
+          "children": [
+            {
+              "name": "P = V x I"
+            },
+            {
+              "name": "Energy Calculations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Current Types",
+      "children": [
+        {
+          "name": "Alternating Current (AC)"
+        },
+        {
+          "name": "Direct Current (DC)"
+        },
+        {
+          "name": "Applications"
+        }
+      ]
+    },
+    {
+      "name": "Circuit Configurations",
+      "children": [
+        {
+          "name": "Series Circuits",
+          "children": [
+            {
+              "name": "Voltage Behavior"
+            },
+            {
+              "name": "Current Behavior"
+            },
+            {
+              "name": "Resistance Combination"
+            }
+          ]
+        },
+        {
+          "name": "Parallel Circuits",
+          "children": [
+            {
+              "name": "Voltage Behavior"
+            },
+            {
+              "name": "Current Behavior"
+            },
+            {
+              "name": "Resistance Combination"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Context",
+      "children": [
+        {
+          "name": "Arduino Preparation"
+        },
+        {
+          "name": "Beginner Level"
+        }
+      ]
+    }
+  ]
+}

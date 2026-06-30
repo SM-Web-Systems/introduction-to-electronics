@@ -1,0 +1,57 @@
+{
+  "name": "Power Supplies for Electronics",
+  "children": [
+    {
+      "name": "Battery Fundamentals",
+      "children": [
+        {
+          "name": "Types"
+        },
+        {
+          "name": "Voltage"
+        },
+        {
+          "name": "Capacity"
+        }
+      ]
+    },
+    {
+      "name": "Bench Power Supply",
+      "children": [
+        {
+          "name": "Safe Operation"
+        }
+      ]
+    },
+    {
+      "name": "Voltage Regulation",
+      "children": [
+        {
+          "name": "Voltage Regulators"
+        },
+        {
+          "name": "Regulated Rails",
+          "children": [
+            {
+              "name": "5V Rail"
+            },
+            {
+              "name": "3.3V Rail"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Arduino Requirements",
+      "children": [
+        {
+          "name": "Microcontroller Power"
+        },
+        {
+          "name": "Peripheral Power"
+        }
+      ]
+    }
+  ]
+}
