@@ -1,0 +1,63 @@
+{
+  "name": "Introduction to Electronics: Signals & Logic",
+  "children": [
+    {
+      "name": "Analogue vs. Digital",
+      "children": [
+        {
+          "name": "Analogue signals"
+        },
+        {
+          "name": "Digital signals"
+        }
+      ]
+    },
+    {
+      "name": "Logic Voltage Levels",
+      "children": [
+        {
+          "name": "HIGH and LOW states"
+        },
+        {
+          "name": "5V Logic"
+        },
+        {
+          "name": "3.3V Logic"
+        }
+      ]
+    },
+    {
+      "name": "Binary Systems",
+      "children": [
+        {
+          "name": "Binary numbers"
+        },
+        {
+          "name": "Counting in binary"
+        }
+      ]
+    },
+    {
+      "name": "Mechanical Switches",
+      "children": [
+        {
+          "name": "Switch operation"
+        },
+        {
+          "name": "Debouncing necessity"
+        }
+      ]
+    },
+    {
+      "name": "Context",
+      "children": [
+        {
+          "name": "Target: Beginners (16+)"
+        },
+        {
+          "name": "Tool: Arduino"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "Essential Electronic Components",
+  "children": [
+    {
+      "name": "Resistors",
+      "children": [
+        {
+          "name": "Types"
+        },
+        {
+          "name": "Colour Codes"
+        },
+        {
+          "name": "Tolerances"
+        },
+        {
+          "name": "Current Limiting"
+        }
+      ]
+    },
+    {
+      "name": "Capacitors",
+      "children": [
+        {
+          "name": "Function"
+        },
+        {
+          "name": "Ratings"
+        },
+        {
+          "name": "Polarisation"
+        }
+      ]
+    },
+    {
+      "name": "Diodes and LEDs",
+      "children": [
+        {
+          "name": "Behaviour"
+        },
+        {
+          "name": "Uses"
+        }
+      ]
+    },
+    {
+      "name": "Transistors",
+      "children": [
+        {
+          "name": "NPN Type"
+        },
+        {
+          "name": "PNP Type"
+        },
+        {
+          "name": "Basic Switches"
+        }
+      ]
+    },
+    {
+      "name": "Inductors",
+      "children": [
+        {
+          "name": "Basic Magnetism"
+        }
+      ]
+    }
+  ]
+}

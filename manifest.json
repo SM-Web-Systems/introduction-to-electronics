@@ -1,0 +1,19 @@
+{
+  "name": "Electronics Academy",
+  "short_name": "Electronics",
+  "description": "Beginner electronics course: safety, core concepts, components, measurement, power, breadboarding, circuits, signals, sensors, and a capstone bridge to Arduino.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='32' y2='32' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='%236366f1'/><stop offset='1' stop-color='%2306b6d4'/></linearGradient></defs><rect width='32' height='32' rx='7' fill='url(%23g)'/><path d='M18 4 L8 18 H14.5 L13.5 28 L24 13 H17.5 Z' fill='%23fff'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education"],
+  "lang": "en"
+}

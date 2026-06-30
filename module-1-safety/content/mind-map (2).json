@@ -1,0 +1,67 @@
+{
+  "name": "Introduction to Electronics",
+  "children": [
+    {
+      "name": "Electrical Safety Rules",
+      "children": [
+        {
+          "name": "Shock Hazards"
+        },
+        {
+          "name": "Fire Risks"
+        },
+        {
+          "name": "Short-Circuit Dangers"
+        },
+        {
+          "name": "Prevention Methods"
+        }
+      ]
+    },
+    {
+      "name": "Safe Lab Practices",
+      "children": [
+        {
+          "name": "Soldering Irons"
+        },
+        {
+          "name": "Cutters"
+        },
+        {
+          "name": "Multimeters"
+        },
+        {
+          "name": "Tool Handling"
+        }
+      ]
+    },
+    {
+      "name": "Component Datasheets",
+      "children": [
+        {
+          "name": "Pinouts"
+        },
+        {
+          "name": "Absolute Maximum Ratings"
+        },
+        {
+          "name": "Voltage Limits"
+        },
+        {
+          "name": "Current Limits"
+        }
+      ]
+    },
+    {
+      "name": "Module Overview",
+      "children": [
+        {
+          "name": "Beginner Level"
+        },
+        {
+          "name": "Arduino Preparation"
+        }
+      ]
+    }
+  ]
+}

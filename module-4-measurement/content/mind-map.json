@@ -1,0 +1,55 @@
+{
+  "name": "Introduction to Electronics Measurement & Test Equipment",
+  "children": [
+    {
+      "name": "Digital Multimeter",
+      "children": [
+        {
+          "name": "Voltage Measurement"
+        },
+        {
+          "name": "Current Measurement"
+        },
+        {
+          "name": "Resistance Measurement"
+        },
+        {
+          "name": "Continuity Testing"
+        }
+      ]
+    },
+    {
+      "name": "Circuit Documentation",
+      "children": [
+        {
+          "name": "Reading Circuit Diagrams"
+        },
+        {
+          "name": "Schematic Symbols"
+        }
+      ]
+    },
+    {
+      "name": "Oscilloscope",
+      "children": [
+        {
+          "name": "Introduction to Device"
+        },
+        {
+          "name": "Display Interpretation"
+        }
+      ]
+    },
+    {
+      "name": "Course Context",
+      "children": [
+        {
+          "name": "Beginner Level"
+        },
+        {
+          "name": "Arduino Preparation"
+        }
+      ]
+    }
+  ]
+}
