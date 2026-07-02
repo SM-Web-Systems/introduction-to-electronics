@@ -2,7 +2,7 @@
 // Cache-first strategy for lesson content and static shell
 
 // Bump this version whenever shell assets change so the new files are installed.
-const CACHE_NAME = 'electronics-lms-v3';
+const CACHE_NAME = 'electronics-lms-v4';
 
 // Static shell files to cache on install
 const SHELL_ASSETS = [
@@ -13,6 +13,9 @@ const SHELL_ASSETS = [
   '/js/course.js',
   '/manifest.json',
   '/favicon.svg',
+  // D3 + marked (vendored locally so they work offline)
+  '/js/vendor/d3/d3.min.js',
+  '/js/vendor/marked/marked.min.js',
   // PPTXjs in-browser slide viewer (vendored locally so it works offline)
   '/js/vendor/pptxjs/pptxjs.css',
   '/js/vendor/pptxjs/jquery.min.js',
