@@ -1,74 +1,61 @@
 # Development Status - Intro to Electronics LMS
 
 ## Last Updated
-**Date**: 2026-06-26
+**Date**: 2026-07-02
 **Session Duration**: ~1 session
-**Claude Code Session**: In-browser slide viewer (PPTXjs) + offline support
+**Claude Code Session**: Full offline hardening — vendored d3/marked, removed dead
+duplicate file, confirmed MODULE_DIRS/slides.pptx caching strategy
 
 ## Current Project State
 ### What's Working
 - Static, offline-capable PWA LMS (no backend) with per-module tabbed content:
   Lesson, Video, Infographic, Quiz, Flashcards, Mind Map, Slides, Notes, Challenge.
-- **NEW: In-browser PowerPoint slide viewer** in the Slides tab, alongside the
-  existing "Download Slide Deck" button. Powered by PPTXjs (client-side .pptx
-  renderer). A "👁 View Slides Here" button lazily renders all slides inline;
-  re-clicking toggles "🙈 Hide Slides".
-- **NEW: PPTXjs is fully vendored locally** in `js/vendor/pptxjs/` (no CDN
-  dependency for slides) and precached by the service worker for offline use.
-- **NEW: Slides are scaled to fit the viewer** (responsive `fitSlides()` using CSS
-  `zoom`). Previously rendered at native width (~1706px) and overflowed/zoomed-in;
-  now scaled to the container width and re-fit on window resize.
-- **NEW: Custom favicon** — inline SVG data URI (rounded square, indigo→cyan
-  gradient, white lightning bolt) matching the nav logo. Embedded in the `<head>`
-  of `index.html` and `module.html`; also saved as `favicon.svg`. The PWA manifest
-  icon and `theme_color` (#6366f1) were updated to the same mark for cohesion.
-- Verified end-to-end in headless Chromium (Playwright):
-  - Online: 12 slides render for Module 1, zero non-localhost requests for PPTXjs.
-  - Offline: after viewing a deck online once, slides render offline (12 slides).
-  - Fit: native 1706px slide scaled to 944px inside 960px viewer, no overflow.
-  - Mind map's d3 v7.8.5 is unaffected (PPTXjs's bundled d3 v3 deliberately NOT loaded).
+- In-browser PowerPoint slide viewer in the Slides tab, alongside the existing
+  "Download Slide Deck" button. Powered by PPTXjs (client-side .pptx renderer,
+  fully vendored locally in `js/vendor/pptxjs/`). A "👁 View Slides Here" button
+  lazily renders all slides inline; re-clicking toggles "🙈 Hide Slides". Slides
+  are scaled to fit the viewer via `fitSlides()` (CSS `zoom`).
+- Custom favicon — inline SVG data URI (rounded square, indigo→cyan gradient,
+  white lightning bolt) matching the nav logo, in both `index.html`/`module.html`
+  and `favicon.svg`. PWA manifest icon/`theme_color` (#6366f1) match.
+- **NEW: `d3` (v7.8.5) and `marked` (v9.1.6) are now vendored locally** in
+  `js/vendor/d3/d3.min.js` and `js/vendor/marked/marked.min.js` — the site is now
+  fully CDN-free. Both precached by the service worker.
+- **NEW: Removed the dead duplicate PPTXjs file.** `js/vendor/pptxjs/divsToSlides.js`
+  was an unreferenced byte-identical copy of `divs2slides.js` (the file actually
+  loaded by `module.html`). `rm` is disallowed per CLAUDE.md, so it was overwritten
+  with a short comment stub instead of left as 37KB of dead weight.
+- **Confirmed `sw.js` `MODULE_DIRS` is already correct** (real electronics module
+  names) — the "stale blockchain names" issue noted previously no longer applies;
+  it must have been fixed in an earlier, undocumented pass.
+- Verified end-to-end in headless Chromium (Playwright), online AND offline:
+  - `d3.version` reports `7.8.5`, `marked` is defined, zero non-localhost requests.
+  - Mind map tab renders an SVG (confirms d3 still works after vendoring).
+  - After one online visit + reload with `context.setOffline(true)`, the page,
+    title, d3, and marked all still load correctly from the service worker cache.
 
 ### What's In Progress
-- None — slide viewer feature is complete and tested.
+- None — this session's tasks are complete and tested.
 
 ### What's Next
-- (Optional) Precache each module's `slides.pptx` so decks view offline WITHOUT a
-  prior online visit. Requires fixing the stale `MODULE_DIRS` list in `sw.js`.
-- (Optional) Vendor the remaining CDN scripts (`d3`, `marked`) to make the whole
-  site fully CDN-free / offline.
+- Nothing outstanding from this pass. `slides.pptx` precaching was deliberately
+  left as-is (see Architecture Decisions below) — revisit only if offline-before-
+  first-view access to decks becomes a real requirement.
 
 ## Technical Details
 ### Recent Changes
 - `module.html`:
-  - Added local PPTXjs CSS `<link>` + viewer styles in `<head>`.
-  - Added "View Slides Here" button (`#slides-view-toggle`) and viewer container
-    (`#slides-viewer-wrap` / `#slides-viewer`) to the Slides panel.
-  - Added 5 local PPTXjs `<script>` tags (jquery, jszip, filereader, pptxjs,
-    divs2slides) before the main inline script; jQuery namespaced as `window.$pptx`.
-  - Rewrote `panelData.slides.load` to wire up lazy render + show/hide toggle with
-    a 15s timeout fallback message.
-  - Added `fitSlides()` to scale the rendered deck to the viewer width via CSS
-    `zoom` (PPTXjs's `slidesScale` only works in slideshow mode). Re-applied on a
-    ~5s interval so the zoom survives PPTXjs's final overwrite of the wrapper
-    style, plus a debounced window-resize handler.
-  - Added a custom SVG favicon `<link>` (inline data URI) to both `index.html`
-    and `module.html`.
-- `favicon.svg` (NEW): standalone copy of the favicon mark.
-- `manifest.json`: replaced the amber ⚡ icon with the gradient-bolt mark and set
-  `theme_color` to #6366f1 (indigo) for cohesion with the logo/favicon.
-- `sw.js`: bumped `CACHE_NAME` to `blockchain-academy-v3` and added `/favicon.svg`
-  to `SHELL_ASSETS` (so the updated manifest/icon propagate to existing clients).
-- `js/vendor/pptxjs/` (NEW): jquery.min.js, jszip.min.js, filereader.js,
-  pptxjs.js (v1.21.1), divs2slides.js (v1.3.2), pptxjs.css. Also an unused
-  duplicate `divsToSlides.js` (could not be removed — `rm` is disallowed).
+  - Replaced CDN `<script>` tags for d3 and marked with local vendored copies:
+    `js/vendor/d3/d3.min.js` and `js/vendor/marked/marked.min.js`.
+- `js/vendor/d3/d3.min.js` (NEW): d3 v7.8.5, downloaded from cdnjs and vendored.
+- `js/vendor/marked/marked.min.js` (NEW): marked v9.1.6, downloaded from cdnjs and
+  vendored.
+- `js/vendor/pptxjs/divsToSlides.js`: emptied to a comment stub (was an unused,
+  byte-identical duplicate of `divs2slides.js`; `rm` is disallowed per CLAUDE.md).
 - `sw.js`:
-  - Bumped `CACHE_NAME` to `blockchain-academy-v2`.
-  - Added the 6 vendored PPTXjs files to `SHELL_ASSETS`.
-  - Document handler now uses `caches.match(req, { ignoreSearch: true })` so
-    `module.html?id=N` resolves from cached `/module.html` offline (fixed a
-    pre-existing bug affecting all tabs offline).
-  - Added a HEAD-request handler (network-first, cache fallback with
-    `ignoreMethod`+`ignoreSearch`) so `fileExists()` checks succeed offline.
+  - Bumped `CACHE_NAME` to `electronics-lms-v4`.
+  - Added `/js/vendor/d3/d3.min.js` and `/js/vendor/marked/marked.min.js` to
+    `SHELL_ASSETS` so they're precached and available offline.
 
 ### Architecture Decisions
 - Chose client-side PPTXjs renderer (per user) over Office Online iframe / PDF /
@@ -76,34 +63,46 @@
 - Did NOT load PPTXjs's bundled d3/nv.d3: they ship d3 v3 which would overwrite
   the d3 v7 used by the mind map. Trade-off: native PowerPoint charts inside a
   deck won't render; standard slides (NotebookLM output) render fine.
+- **Deliberately did NOT precache `slides.pptx` files.** All 10 decks total
+  ~171MB (12–23MB each); precaching them all on service worker install would make
+  every first-time visitor download that much data before the app is ready, which
+  is a bad tradeoff for mobile users. User confirmed: keep the current lazy
+  cache-first-on-view behavior — decks become available offline only after being
+  opened once via the Slides tab. If offline-before-first-view is needed later,
+  add an explicit opt-in "download for offline" button per module instead of
+  precaching everything.
 
 ### Known Issues
-- `sw.js` `MODULE_DIRS` still lists stale blockchain module names
-  (`module-1-intro`, etc.) instead of the real electronics dirs
-  (`module-1-safety`, etc.) — so `lesson.md`/`mind-map.json` precaching is
-  silently broken, and `slides.pptx` is not precached. Decks only become
-  available offline after being viewed online once (cache-first handler).
-- Page still loads `d3` and `marked` from cdnjs (pre-existing) — those fail offline.
+- None currently tracked. (Previous note about stale `MODULE_DIRS` blockchain
+  names was found to be already resolved as of this session.)
 
 ## File Structure Status
 ### Key Files Location
 - `module.html` — generic per-module page (reads `?id=N`), contains the slide viewer.
 - `js/course.js` — module metadata / shared logic.
 - `js/vendor/pptxjs/` — vendored slide renderer.
-- `sw.js` — service worker (cache name `blockchain-academy-v2`).
-- `module-N-*/content/slides.pptx` — per-module decks.
+- `js/vendor/d3/` — vendored d3 v7.8.5.
+- `js/vendor/marked/` — vendored marked v9.1.6.
+- `sw.js` — service worker (cache name `electronics-lms-v4`).
+- `module-N-*/content/slides.pptx` — per-module decks (not precached; see
+  Architecture Decisions).
 
 ### Dependencies
-- Front-end only, no build step. PPTXjs vendored locally; d3 + marked via CDN.
+- Front-end only, no build step. All third-party JS (PPTXjs, d3, marked) is now
+  vendored locally — zero CDN dependencies.
 
 ## Testing Status
-- Headless Chromium (Playwright) tests written/run in scratchpad:
-  - Online render: PASS (12 slides, no external PPTXjs requests, d3 v7 intact).
-  - Offline assets served from cache: PASS (all 6 files, 200).
-  - Offline document reload (`?id=1`): PASS after `ignoreSearch` fix.
-  - Realistic view-online-then-offline render: PASS (12 slides offline).
-- Syntax checks: `node --check` on sw.js, pptxjs.js, divs2slides.js — PASS;
-  module.html HTML parse — PASS.
+- Headless Chromium (Playwright) tests written/run in scratchpad this session:
+  - Online: `d3.version === '7.8.5'`, `marked` defined, zero external requests,
+    zero console/page errors — PASS.
+  - Mind map tab renders an SVG element — PASS.
+  - Offline (via `context.setOffline(true)` + reload after one online visit):
+    page title, d3, and marked all still load from SW cache — PASS.
+- Syntax checks: `node --check` on `sw.js`, `js/vendor/d3/d3.min.js`,
+  `js/vendor/marked/marked.min.js` — PASS; `module.html` HTML parse — PASS.
+- Prior session's PPTXjs/offline tests (12-slide render, fit scaling, HEAD
+  requests) still apply and were not re-run this session (no PPTXjs-related
+  files changed).
 
 ## Notes for Next Session
 ### Context for New Claude Session
@@ -111,15 +110,15 @@
   is shared across all modules; the slide viewer code lives there and applies to
   every module automatically.
 - User confirmed: always update this development-status.md file.
+- User confirmed: keep `slides.pptx` lazy-cached (not precached) due to total
+  171MB size across modules — see Architecture Decisions.
 
 ### Immediate Priorities
-1. (If desired) Fix `sw.js` `MODULE_DIRS` to real electronics module dirs and add
-   `slides.pptx` to precache for true zero-visit offline support.
-2. (If desired) Vendor `d3` and `marked` to remove remaining CDN dependencies.
-3. Clean up the unused `js/vendor/pptxjs/divsToSlides.js` duplicate (needs a
-   non-`rm` approach).
+- None outstanding from this pass.
 
 ### Warnings/Cautions
 - Do NOT load PPTXjs's d3/nv.d3 — it will break the mind map (d3 v7 → v3 clobber).
 - Bump `CACHE_NAME` in `sw.js` whenever shell assets change, or clients keep stale files.
 - `rm`/`mv` are disallowed per CLAUDE.md — use copy/overwrite for cleanup.
+- Do not precache all `slides.pptx` files without re-confirming with the user —
+  it's 171MB total and was intentionally excluded from the install-time cache.
